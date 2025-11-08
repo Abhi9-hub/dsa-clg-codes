@@ -1,0 +1,38 @@
+package recursion.backtracking;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class subsets_78 {
+
+    public static List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> currentSubset = new ArrayList<>();
+        generateSubsets(nums, 0, currentSubset, result);
+        return result;
+    }
+
+    private static void generateSubsets(int[] nums, int index, List<Integer> currentSubset, List<List<Integer>> result) {
+        
+        if (index == nums.length) {
+            result.add(new ArrayList<>(currentSubset)); 
+            return;
+        }
+
+    
+        currentSubset.add(nums[index]);
+        generateSubsets(nums, index + 1, currentSubset, result);
+
+        
+        currentSubset.remove(currentSubset.size() - 1); 
+        generateSubsets(nums, index + 1, currentSubset, result);
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3};
+        List<List<Integer>> allSubsets = subsets(arr);
+        for (List<Integer> subset : allSubsets) {
+            System.out.println(subset);
+        }
+    }
+}
